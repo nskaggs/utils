@@ -48,6 +48,8 @@ func NewPackagingConfigurer(series string) (PackagingConfigurer, error) {
 		return NewYumPackagingConfigurer(series), nil
 	case "opensuseleap":
 		return NewZypperPackagingConfigurer(series), nil
+	case "streams":
+		return NewStreamsPackagingConfigurer(series), nil
 	default:
 		return NewAptPackagingConfigurer(series), nil
 	}
@@ -76,5 +78,13 @@ func NewZypperPackagingConfigurer(series string) PackagingConfigurer {
 		series:               series,
 		defaultPackages:      OpenSUSEDefaultPackages,
 		cloudArchivePackages: cloudArchivePackagesOpenSUSE,
+	}}
+
+// NewStreamsPackagingConfigurer returns a PackagingConfigurer for streams packages
+func NewStreamsPackagingConfigurer(series string) PackagingConfigurer {
+	return &zypperConfigurer{&baseConfigurer{
+		series:               series,
+		defaultPackages:      StreamsDefaultPackages,
+		cloudArchivePackages: cloudArchivePackagesStreams,
 	}}
 }

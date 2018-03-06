@@ -98,6 +98,8 @@ func NewPackageCommander(series string) (PackageCommander, error) {
 		return NewYumPackageCommander(), nil
 	case "opensuseleap":
 		return NewZypperPackageCommander(), nil
+	case "streams":
+		return NewStreamsPackageCommander(), nil
 	default:
 		return NewAptPackageCommander(), nil
 	}
@@ -116,4 +118,9 @@ func NewYumPackageCommander() PackageCommander {
 // NewZypperPackageCommander returns a PackageCommander for zypper-based systems.
 func NewZypperPackageCommander() PackageCommander {
 	return &zypperCmder
+}
+
+// NewStreamsPackageCommander returns a PackageCommander for streams-based systems.
+func NewStreamsPackageCommander() PackageCommander {
+	return &streamsCmder
 }
