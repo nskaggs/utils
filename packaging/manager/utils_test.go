@@ -86,6 +86,14 @@ func (s *UtilsSuite) TestRunCommandWithRetryDoesNotCallCombinedOutputTwice(c *gc
 	err = zypper.Install(testedPackageName)
 	c.Check(err, gc.ErrorMatches, "packaging command failed: exit status.*")
 	c.Check(calls, gc.Equals, minRetries)
+
+	// reset calls and re-test for Zypper calls:
+	calls = 0
+	streams := manager.NewStreamsPackageManager()
+	err = streams.Install(testedPackageName)
+	c.Check(err, gc.ErrorMatches, "packaging command failed: exit status.*")
+	c.Check(calls, gc.Equals, minRetries)
+
 }
 
 func (s *UtilsSuite) TestRunCommandWithRetryStopsWithFatalError(c *gc.C) {

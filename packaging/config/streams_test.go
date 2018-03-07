@@ -21,10 +21,6 @@ func (s *StreamsSuite) SetUpSuite(c *gc.C) {
 	s.pacconfer = config.NewStreamsPackagingConfigurer(testedSeriesCentOS)
 }
 
-func (s *StreamsSuite) TestDefaultPackages(c *gc.C) {
-	c.Assert(s.pacconfer.DefaultPackages(), gc.DeepEquals, config.CentOSDefaultPackages)
-}
-
 func (s *StreamsSuite) TestGetPackageNameForSeriesSameSeries(c *gc.C) {
 	for _, pack := range testedPackages {
 		res, err := s.pacconfer.GetPackageNameForSeries(pack, testedSeriesCentOS)
@@ -39,14 +35,4 @@ func (s *StreamsSuite) TestGetPackageNameForSeriesErrors(c *gc.C) {
 		c.Assert(res, gc.Equals, "")
 		c.Assert(err, gc.ErrorMatches, fmt.Sprintf("no equivalent package found for series %s: %s", "some-other-series", pack))
 	}
-}
-
-func (s *StreamsSuite) TestRenderSource(c *gc.C) {
-	expected, err := testedSource.RenderSourceFile(config.StreamsSourceTemplate)
-	c.Assert(err, jc.ErrorIsNil)
-
-	res, err := s.pacconfer.RenderSource(testedSource)
-	c.Assert(err, jc.ErrorIsNil)
-
-	c.Assert(res, gc.Equals, expected)
 }

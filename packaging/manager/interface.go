@@ -99,6 +99,7 @@ func NewZypperPackageManager() PackageManager {
 	return &zypper{basePackageManager{commands.NewZypperPackageCommander()}}
 }
 
+// NewStreamsPackageManager returns a PackageManager for simplestreams.
 func NewStreamsPackageManager() PackageManager {
 	return &streams{basePackageManager{commands.NewStreamsPackageCommander()}}
 }

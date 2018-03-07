@@ -79,12 +79,11 @@ func NewZypperPackagingConfigurer(series string) PackagingConfigurer {
 		defaultPackages:      OpenSUSEDefaultPackages,
 		cloudArchivePackages: cloudArchivePackagesOpenSUSE,
 	}}
+}
 
 // NewStreamsPackagingConfigurer returns a PackagingConfigurer for streams packages
 func NewStreamsPackagingConfigurer(series string) PackagingConfigurer {
 	return &zypperConfigurer{&baseConfigurer{
-		series:               series,
-		defaultPackages:      StreamsDefaultPackages,
-		cloudArchivePackages: cloudArchivePackagesStreams,
+		series: series,
 	}}
 }
