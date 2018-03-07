@@ -31,6 +31,7 @@ func (s *ManagerSuite) SetUpSuite(c *gc.C) {
 	s.apt = manager.NewAptPackageManager()
 	s.yum = manager.NewYumPackageManager()
 	s.zypper = manager.NewZypperPackageManager()
+	s.streams = manager.NewStreamsPackageManager()
 }
 
 func (s *ManagerSuite) SetUpTest(c *gc.C) {
@@ -57,6 +58,10 @@ var (
 	// zypperCmder is the commands.PackageCommander for zypper-based
 	// systems whose commands will be checked against.
 	zypperCmder = commands.NewZypperPackageCommander()
+
+	// streamsCmder is the commands.PackageCommander for zypper-based
+	// systems whose commands will be checked against.
+	streamsCmder = commands.NewStreamsPackageCommander()
 
 	// testedPackageName is the package name used in all
 	// single-package testing scenarios.
@@ -126,6 +131,12 @@ type simpleTestCase struct {
 
 	// the expected result of the given yum operation:
 	expectedZypperResult interface{}
+
+	// the expected streams command which will get executed:
+	expectedStreamsCmd string
+
+	// the expected result of the given streams operation:
+	expectedStreamsResult interface{}
 
 	// the function to be applied on the package manager.
 	// returns the result of the operation and the error.

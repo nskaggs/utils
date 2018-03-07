@@ -1,5 +1,4 @@
-// Copyright 2015 Canonical Ltd.
-// Copyright 2015 Cloudbase Solutions SRL
+// Copyright 2018 Canonical Ltd.
 // Licensed under the LGPLv3, see LICENCE file for details.
 
 package manager_test
