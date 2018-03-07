@@ -5,10 +5,7 @@ package commands
 
 const (
 	// the basic command for all streams-get calls:
-	//		--force-confold is passed to dpkg to never overwrite config files
-	//		--force-unsafe-io makes dpkg less sync-happy
-	//		--assume-yes to never prompt for confirmation
-	streamsget = "streams-get --option=Dpkg::Options::=--force-confold --option=Dpkg::options::=--force-unsafe-io --assume-yes --quiet"
+	streamsget = "curl -sSfw ' binaries from %{url_effective} downloaded: HTTP %{http_code}; time %{time_total}s; size %{size_download} bytes; speed %{speed_download} bytes/s '"
 
 	// the basic format for specifying a proxy option for streams:
 	streamsProxySettingFormat = "Acquire::%s::Proxy %q;"
